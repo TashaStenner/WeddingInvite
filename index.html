@@ -150,11 +150,13 @@
           })
             .then(
               (res) => res.json(),
-              (complete.innerHTML = "That's was successful, thank you for letting us know!")
+              (complete.innerHTML = "That's was successful, thank you for letting us know!"),
+              form.reset()
             )
             .catch(
               (err) => console.log(err),
-              (complete.innerHTML = "Thank you for letting us know!")
+              (complete.innerHTML = "Thank you for letting us know!"),
+              form.reset()
             );
         };
       });
@@ -169,10 +171,16 @@
           .then(
             (response) => (
               console.log("Ye"),
-              (responsePost.innerHTML = "That's ok, thank you for letting us know!")
+              (responsePost.innerHTML = "That's ok, thank you for letting us know!"),
+              noForm.reset()
             )
           )
-          .catch((error) => (responsePost.innerHTML = "That's ok, thank you for letting us know!"));
+          .catch(
+            (error) => (
+              (responsePost.innerHTML = "That's ok, thank you for letting us know!"),
+              noForm.reset()
+            )
+          );
       });
     </script>
   </body>
