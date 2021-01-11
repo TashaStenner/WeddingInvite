@@ -42,7 +42,7 @@
               <label for="No" class="invite">No, sorry I can't make it </label>
             </div>
           </fieldset>
-          <input class="rsvpSubmit" type="submit" onclick="checkRsvp();" />
+          <input class="rsvpSubmit" type="submit" onclick="checkRsvp()" />
         </div>
 
         <form id="form">
@@ -70,6 +70,7 @@
             <br />
             <p class="invite" id="uploadComp"></p>
             <input class="submit" id="submit" type="submit" />
+            <button class="goBack" onclick="goBack()">Go Back</button>
           </div>
         </form>
 
@@ -81,6 +82,7 @@
           </fieldset>
           <p class="invite" id="uploadComplete"></p>
           <input class="submit rsvpSubmit" type="submit" />
+          <button class="goBack" onclick="goBack()">Go Back</button>
         </form>
       </div>
     </section>
@@ -112,6 +114,18 @@
         console.log(attending);
       };
 
+      let goBack = () => {
+        let unHideRsvp = document.getElementById("rsvp");
+        let displayRsvp = document.getElementById("form");
+        let hideText = document.getElementById("hide");
+        let noRsvp = document.getElementById("noRsvp");
+
+        noRsvp.style.display = "none";
+        hideText.style.display = "block";
+        displayRsvp.style.display = "none";
+        unHideRsvp.style.display = "block";
+      };
+
       const form = document.getElementById("form");
       let complete = document.getElementById("uploadComp");
       form.addEventListener("submit", (e) => {
@@ -136,10 +150,12 @@
           })
             .then(
               (res) => res.json(),
-              (complete.innerHTML = "That's ok, thank you for letting us know!")
+              (complete.innerHTML = "That's was successful, thank you for letting us know!")
             )
-            .then((e) => console.log(e)) // <--- You can retrieve the returned value here.
-            .catch((err) => console.log(err));
+            .catch(
+              (err) => console.log(err),
+              (complete.innerHTML = "Thank you for letting us know!")
+            );
         };
       });
 

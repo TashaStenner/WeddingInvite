@@ -89,8 +89,7 @@
   }
   
   #submit,  .rsvpSubmit {
-    width: 30%;
-    margin: 10px;
+    width: 40%;
     background-color: #9879d1;
     border: none;
     padding: 5px;
@@ -104,7 +103,7 @@
     width: 70%;
   }
   
-  #submit:hover , .rsvpSubmit:hover{
+  #submit:hover , .rsvpSubmit:hover, .goBack:hover{
     border: 1px solid black;
   }
 
@@ -123,6 +122,22 @@
   #noRsvp fieldset {
     border: 0; 
   }
+
+    .goBack {
+    margin: 10px;
+    background-color: #94e3f7;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: "Redressed", cursive;
+    font-size: 18px;
+  }
+
+  .rsvpSubmit {
+    margin-top: 5px;
+    width: 70%;
+  }
+
 
 }
 
