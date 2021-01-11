@@ -59,7 +59,14 @@
               <textarea id="diet" name="diet" rows="6"></textarea>
             </fieldset>
             <p class="invite">Send us a silly selfie!</p>
-            <input id="file" name="file" id="uploadfile" type="file" required accept="image/png, image/jpeg"/>
+            <input
+              id="file"
+              name="file"
+              id="uploadfile"
+              type="file"
+              required
+              accept="image/png, image/jpeg"
+            />
             <br />
             <p class="invite" id="uploadComp"></p>
             <input class="submit" id="submit" type="submit" />
@@ -70,7 +77,7 @@
           <p class="invite">Can't attend?</p>
           <fieldset class="name">
             <label for="notAttending" class="invite">Guest Name: </label>
-            <input id="notAttending" name="Can't Attend" required/>
+            <input id="notAttending" name="Name" required />
           </fieldset>
           <p class="invite" id="uploadComplete"></p>
           <input class="submit rsvpSubmit" type="submit" />
@@ -119,30 +126,27 @@
 
           const qs = new URLSearchParams({
             Diet: form.diet.value,
-            Attending: form.name.value,
-            Rsvp: "Yes",
+            Name: form.name.value,
             filename: form.name.value || file.name,
             mimeType: file.type,
           });
-          console.log([...new Int8Array(f.target.result)]);
           fetch(`${url}?${qs}`, {
             method: "POST",
             body: JSON.stringify([...new Int8Array(f.target.result)]),
           })
-            .then((res) =>
-              res.json(),((complete.innerHTML = "That's ok, thank you for letting us know!"))
+            .then(
+              (res) => res.json(),
+              (complete.innerHTML = "That's ok, thank you for letting us know!")
             )
             .then((e) => console.log(e)) // <--- You can retrieve the returned value here.
-            .catch(
-              (err) => console.log(err)
-            );
+            .catch((err) => console.log(err));
         };
       });
 
       let noForm = document.getElementById("noRsvp");
       let responsePost = document.getElementById("uploadComplete");
       const scriptURL =
-        "https://script.google.com/macros/s/AKfycbyGyKzFSFgXHQQkmJWVlL0camEEeWDZIZVHg2xq33MboHOIfZM/exec";
+        "https://script.google.com/macros/s/AKfycbyhRap2TxsuTswxWBlet5r9NoKJZ2DwzrGxeS96fg/exec";
       noForm.addEventListener("submit", (e) => {
         e.preventDefault();
         fetch(scriptURL, { method: "POST", body: new FormData(noForm) })
@@ -152,7 +156,7 @@
               (responsePost.innerHTML = "That's ok, thank you for letting us know!")
             )
           )
-          .catch((error) => (responsePost.innerHTML = "Ah, that didn't work. Please try again"));
+          .catch((error) => (responsePost.innerHTML = "That's ok, thank you for letting us know!"));
       });
     </script>
   </body>
