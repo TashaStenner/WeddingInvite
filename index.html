@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Atwill Ralls Wedding</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
       rel="stylesheet"
     />
+  <link rel="icon" type="image/png" href="/bells.png"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet" />
     <script
@@ -59,14 +60,18 @@
               <textarea id="diet" name="diet" rows="6"></textarea>
             </fieldset>
             <p class="invite">Send us a silly selfie!</p>
-            <input
-              id="file"
-              name="file"
-              id="uploadfile"
-              type="file"
-              required
-              accept="image/png, image/jpeg"
-            />
+            <div class="upload-btn-wrapper">
+              <button class="btn">Upload</button>
+              <input
+                id="file"
+                name="file"
+                id="uploadfile"
+                type="file"
+                required
+                accept="image/png, image/jpeg"
+                class="custom-file-input"
+              />
+            </div>
             <br />
             <p class="invite" id="uploadComp"></p>
             <input class="submit" id="submit" type="submit" />
@@ -177,8 +182,7 @@
           )
           .catch(
             (error) => (
-              (responsePost.innerHTML = "That's ok, thank you for letting us know!"),
-              noForm.reset()
+              (responsePost.innerHTML = "That's ok, thank you for letting us know!"), noForm.reset()
             )
           );
       });

@@ -108,6 +108,7 @@
   .rsvpSubmit:hover,
   .goBack:hover {
     border: 1px solid black;
+    cursor: pointer;
   }
 
   form fieldset {
@@ -137,6 +138,34 @@
     font-family: "Redressed", cursive;
     font-size: 18px;
   }
+
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .btn {
+    border: 2px solid #9879d1;
+    color: black;
+    font-family: "Redressed", cursive;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+   .upload-btn-wrapper:hover {
+     cursor: pointer !important;
+   }
+
+  .upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
 }
 
 @media only screen and (min-width: 505px) {
@@ -160,7 +189,7 @@
     width: 50%;
   }
 
-   #submit,
+  #submit,
   .rsvpSubmit {
     width: 30%;
   }
