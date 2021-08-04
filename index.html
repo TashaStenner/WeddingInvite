@@ -23,14 +23,44 @@
   <body>
     <section class="border">
       <div class="content">
-        <h1>Kirsty Atwill</h1>
-        <p>and</p>
-        <h1>Phillip Ralls</h1>
-        <p class="invite" id="hide">Invite you to celebrate the joy of their wedding day</p>
-        <p class="details">14:00</p>
-        <p class="details">26th February 2022</p>
+        <p class="invite" id="hide">You are invited to the wedding of </p>
+        <h1>Kirsty Jean Atwill</h1>
+        <p>&</p>
+        <h1>Phillip Anthony Ralls</h1>
+        <p class="details">12:00</p>
+        <p class="details">Saturday 26th February 2022</p>
         <p class="details">Bristol Harbour Hotel</p>
-
+        <p class="details">Reception to follow</p>
+        <div id="additional_info">
+          <button class="info_buttons" onclick="toggleGettingThere()">Getting there</button>
+          <button class="info_buttons" onclick="toggleHotel()">Accommodation</button>
+          <button class="info_buttons"onclick="toggleParking()">Parking information</button>
+          <button class="info_buttons" onclick="toggleChildren()" >Children</button>
+          <button class="info_buttons" onclick="toggleGifts()" >Gifts</button>
+          
+        </div>
+        <div id="getting_there" style="display:none">
+          <a href="https://www.harbourhotels.co.uk/bristol">https://www.harbourhotels.co.uk/bristol</a>
+          <p>53-55 Corn St, Bristol BS1 1HT and hotel website</p>
+        </div>
+        <div id="parking" style="display:none">
+          <p>There are a number of NCPs within walking distance to the Bristol Harbour Hotel. The hotel offers a 20% discount at the NCP car park on Nelson Street (BS1 3DB), Which is less than half a mile away from the hotel. A discount voucher can be obtained from the hotel reception and used on departure of the car park.</p>
+        </div>
+        <div id="gifts" style="display:none">
+          <p>Your presence at our wedding is all that we wish for, however, if you want to give a gift, we will be grateful for a cash donation towards our new home renovations.</p>
+          <p>If you would prefer to transfer money we have a joint bank account.
+            <br/>
+            Sort code: 07-08-06
+            <br/>
+            Account no: 24296536</p>
+         </div>
+         <div id="children" style="display:none">
+          <p>We are not inviting young children as we would love for you to relax and enjoy the day, however please speak to us in advance if you need to bring your children.</p>
+        </div>
+        <div id="hotel" style="display:none">
+          <a href="https://www.booking.com/hotel/gb/bristol-harbour.en-gb.html">Booking.com</a>
+          <p>Please contact us directly to see if we have any discounted rooms available at the harbour hotel.</p>
+        </div>
         <div id="rsvp">
           <fieldset class="rsvp">
             <legend>RSVP</legend>
@@ -43,6 +73,7 @@
               <label for="No" class="invite">No, sorry I can't make it </label>
             </div>
           </fieldset>
+          <p class="rsvp_reply">Please RSVP by 26TH November 2021</p>
           <input class="rsvpSubmit" type="submit" onclick="checkRsvp()" />
         </div>
 
@@ -55,6 +86,38 @@
               <input id="name" name="name" required />
             </fieldset>
             <br />
+
+            <fieldset class="menu">
+              <legend class="invite">Menu</legend>
+              <legend class="invite">Starters</legend>
+              <div>
+                <input id="vg_soup" type="radio" name="vg_soup" value="vg_soup" />
+                <label for="vg_soup">Leek and Potato soup (vg) Recommended</label>
+                <input id="soup" type="radio" name="soup" value="soup" />
+                <label for="soup">Leek and Potato soup, with blue cheese and crispy leeks</label> <br />
+              </div>
+          
+            <legend class="invite">Mains</legend>
+            <div>
+              <input id="BBQtart" type="radio" name="BBQ_tart" value="BBQ tart" />
+              <label for="BBQtart">BBQ pulled jackfruit tart, garlic and herb crushed potatoes (vg) Recommended</label>
+            </div>
+            <div>
+              <input id="pork" type="radio" name="pork" value="Pork" />
+              <label for="pork"> Slow cooked porked belly, garlic and herb crushed potatoes, apple and beetroot puree</label> <br />
+            </div>
+      
+          <legend class="invite">Desserts</legend>
+          <div>
+            <input id="panacotta" type="radio" name="panacotta" value="panacotta" />
+            <label for="panacotta">Panacotta with fruits of the forest berry compote (vg) Recommended </label>
+          </div>
+          <div>
+            <input id="tart" type="radio" name="tart" value="tart" />
+            <label for="tart"> Salted caramel tart with chantilly cream </label> <br />
+          </div>
+        </fieldset>
+        <br/>
             <fieldset class="pure-group">
               <label class="invite" for="diet">Dietary requirements/Allergies: </label>
               <textarea id="diet" name="diet" rows="6"></textarea>
@@ -84,11 +147,19 @@
           <fieldset class="name">
             <label for="notAttending" class="invite">Guest Name: </label>
             <input id="notAttending" name="Name" required />
+            
           </fieldset>
+          <br/>
+          <p class="invite">Our evening reception starts at 19:00. If you would like to come to the evening only</p>
+          <a class="invite" href="https://evening.atwillrallswedding.co.uk/">Click here!</a>
+          
           <p class="invite" id="uploadComplete"></p>
           <input class="submit rsvpSubmit" type="submit" />
           <button class="goBack" onclick="goBack()">Go Back</button>
         </form>
+
+       
+
       </div>
     </section>
 
@@ -131,51 +202,60 @@
         unHideRsvp.style.display = "block";
       };
 
-      const form = document.getElementById("form");
+      let attendingForm = document.getElementById("form");
       let complete = document.getElementById("uploadComp");
-      form.addEventListener("submit", (e) => {
+      attendingForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log("in");
         const file = form.file.files[0];
         const fr = new FileReader();
         fr.readAsArrayBuffer(file);
         fr.onload = (f) => {
-          const url =
-            "https://script.google.com/macros/s/AKfycbyGyKzFSFgXHQQkmJWVlL0camEEeWDZIZVHg2xq33MboHOIfZM/exec"; // <--- Please set the URL of Web Apps.
+          const url = "https://script.google.com/macros/s/AKfycbyGyKzFSFgXHQQkmJWVlL0camEEeWDZIZVHg2xq33MboHOIfZM/exec"; // <--- Please set the URL of Web Apps.
 
           const qs = new URLSearchParams({
-            Diet: form.diet.value,
-            Name: form.name.value,
-            filename: form.name.value || file.name,
+            Name: attendingForm.name.value,
+            Diet: attendingForm.diet.value,
+            filename: attendingForm.name.value || file.name,
             mimeType: file.type,
+            Starter_VG_Soup: attendingForm.vg_soup.checked,
+            Starter_Soup: attendingForm.soup.checked,
+            Main_VG_BBQ_Tart: attendingForm.BBQ_tart.checked,
+            Main_Pork: attendingForm.pork.checked,
+            Dessert_C_Tart: attendingForm.tart.checked,
+            Dessert_VG_Panacotta: attendingForm.panacotta.checked,
           });
           fetch(`${url}?${qs}`, {
             method: "POST",
             body: JSON.stringify([...new Int8Array(f.target.result)]),
+            mode: "no-cors"
           })
             .then(
               (res) => res.json(),
               (complete.innerHTML = "That's was successful, thank you for letting us know!"),
-              form.reset()
+              attendingForm.reset()
             )
             .catch(
               (err) => console.log(err),
               (complete.innerHTML = "Thank you for letting us know!"),
-              form.reset()
+              attendingForm.reset()
             );
         };
       });
 
       let noForm = document.getElementById("noRsvp");
       let responsePost = document.getElementById("uploadComplete");
-      const scriptURL =
-        "https://script.google.com/macros/s/AKfycbyhRap2TxsuTswxWBlet5r9NoKJZ2DwzrGxeS96fg/exec";
+      let scriptURL =
+        "https://script.google.com/macros/s/AKfycbysLoe-TmUCRIpSa9vprdTzpkruMXRLy9X266zZDrEfV-3UYGar/exec";
+
+     
       noForm.addEventListener("submit", (e) => {
+        console.log(noForm.eveningOnly.checked)
         e.preventDefault();
-        fetch(scriptURL, { method: "POST", body: new FormData(noForm) })
+        fetch(scriptURL, { method: "POST", body: new FormData(noForm), headers: {
+           "Content-Type": "application/json"
+        },  mode: "no-cors"})
           .then(
             (response) => (
-              console.log("Ye"),
               (responsePost.innerHTML = "That's ok, thank you for letting us know!"),
               noForm.reset()
             )
@@ -186,6 +266,51 @@
             )
           );
       });
+
+      function toggleGettingThere() {
+        var x = document.getElementById("getting_there");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function toggleHotel() {
+        var x = document.getElementById("hotel");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function toggleParking() {
+        var x = document.getElementById("parking");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function toggleChildren() {
+        var x = document.getElementById("children");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+      function toggleGifts() {
+        var x = document.getElementById("gifts");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
     </script>
   </body>
 </html>

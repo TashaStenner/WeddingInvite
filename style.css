@@ -81,6 +81,10 @@
     margin-top: 20px;
   }
 
+  .rsvp_reply {
+    font-size: 16px;
+  }
+
   #form {
     display: none;
     height: 30%;
@@ -168,6 +172,63 @@
     top: 0;
     opacity: 0;
   }
+
+  .menu {
+    width: 50%;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+  }
+
+  .rsvp_reply {
+    color: black;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  #additional_info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  #getting_there, #hotel, #parking, #children, #gifts {
+    border: 1px solid black; 
+    width: 70%;
+    margin: 5px auto;
+    padding: 5px;
+  }
+
+  #getting_there p, #hotel p, #parking p, #children p, #gifts p{
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  a {
+    color: black;
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .info_buttons {
+    background-color: gold;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    border: 1px solid gold;
+    margin: 5px;
+  }
+
+  .info_buttons:hover {
+    border: 1px solid black;
+    cursor: pointer;
+  }
 }
 
 @media only screen and (min-width: 505px) {
@@ -200,4 +261,19 @@
     width: 70%;
     margin: 0 auto;
   }
+
 }
+
+
+
+@media only screen and (min-width: 1000px) {
+  a {
+    font-size: 16px;
+  }
+
+  #additional_info {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
