@@ -92,17 +92,17 @@
               <legend class="invite">Starters</legend>
               <div>
                 <input id="soup" type="radio" name="soup" value="soup" />
-                <label for="soup">Leek and Potato soup(vg) with blue cheese and crispy leeks</label><br />
+                <label for="soup">Leek and Potato soup (vg) with blue cheese and crispy leeks (We recommend)</label><br />
               </div>
               <div>
                 <input id="vg_soup" type="radio" name="vg_soup" value="vg_soup" />
-                <label for="vg_soup">Leek and Potato soup(vg) with crispy leeks(Recommended)</label>
+                <label for="vg_soup">Leek and Potato soup (vg) with crispy leeks</label>
               </div>
           
             <legend class="invite">Mains</legend>
             <div>
               <input id="BBQtart" type="radio" name="BBQ_tart" value="BBQ tart" />
-              <label for="BBQtart">BBQ pulled jackfruit tart, garlic and herb crushed potatoes (vg) (Recommended)</label>
+              <label for="BBQtart">BBQ pulled jackfruit tart, garlic and herb crushed potatoes (vg) (We recommend)</label>
             </div>
             <div>
               <input id="pork" type="radio" name="pork" value="Pork" />
@@ -112,7 +112,7 @@
           <legend class="invite">Desserts</legend>
           <div>
             <input id="panacotta" type="radio" name="panacotta" value="panacotta" />
-            <label for="panacotta">Panacotta with fruits of the forest berry compote (vg) (Recommended)</label>
+            <label for="panacotta">Panacotta with fruits of the forest berry compote (vg) (We recommend)</label>
           </div>
           <div>
             <input id="tart" type="radio" name="tart" value="tart" />
@@ -137,6 +137,7 @@
                 class="custom-file-input"
               />
             </div>
+            <p id="uploadedFile" class="invite"></p>
             <br />
             <p class="invite" id="uploadComp"></p>
             <input class="submit" id="submit" type="submit" />
@@ -145,8 +146,7 @@
         </form>
 
         <form id="noRsvp" id="gform">
-          <p class="invite">We're sorry you cannot attend, please let us know by submitting your name below</p>
-          <p class="invite">Our evening reception starts at 19:00. If you would like to come to the evening only, please click on the evening button below and follow the instructions</p>
+          <p class="invite">We're sorry you cannot attend, please let us know by submitting your name below. </br>If you can only attend the evening, please click the evening button below and follow the instructions.</p>
           <fieldset class="name">
             <label for="notAttending" class="invite">Guest Name: </label>
             <input id="notAttending" name="Name" required />
@@ -195,18 +195,22 @@
         let displayRsvp = document.getElementById("form");
         let hideText = document.getElementById("hide");
         let noRsvp = document.getElementById("noRsvp");
+        let infoArea = document.getElementById( 'uploadedFile' );
+
 
         noRsvp.style.display = "none";
         hideText.style.display = "block";
         displayRsvp.style.display = "none";
         unHideRsvp.style.display = "block";
+        infoArea.style.display = "none";
+        infoArea.textContent = '';
       };
 
       let attendingForm = document.getElementById("form");
       let complete = document.getElementById("uploadComp");
       attendingForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const file = form.file.files[0];
+        const file = attendingForm.file.files[0];
         const fr = new FileReader();
         fr.readAsArrayBuffer(file);
         fr.onload = (f) => {
@@ -309,6 +313,24 @@
         } else {
           x.style.display = "none";
         }
+      }
+
+      let input = document.getElementById( 'file' );
+      let infoArea = document.getElementById( 'uploadedFile' );
+
+      input.addEventListener( 'change', showFileName );
+
+      function showFileName( event ) {
+        
+        // the change event gives us the input it occurred in 
+        var input = event.srcElement;
+        
+        // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+        var fileName = input.files[0].name;
+        
+        // use fileName however fits your app best, i.e. add it into a div
+        infoArea.textContent = 'File name: ' + fileName;
+        infoArea.style.display = "block";
       }
     </script>
   </body>
