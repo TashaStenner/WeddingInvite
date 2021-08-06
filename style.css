@@ -98,7 +98,8 @@
   }
 
   #submit,
-  .rsvpSubmit {
+  .rsvpSubmit,
+  .eveningInvite {
     width: 60%;
     background-color: #9879d1;
     border: none;
@@ -108,9 +109,13 @@
     font-size: 18px;
   }
 
+  .eveningInvite {
+    background-color: gold;
+  }
+
   .rsvpSubmit {
-    margin-top: 5px;
-    width: 70%;
+    margin: 5px 5px;
+    width: 90%;
   }
 
   #submit:hover,

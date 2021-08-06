@@ -146,8 +146,7 @@
 
         <form id="noRsvp" id="gform">
           <p class="invite">We're sorry you cannot attend, please let us know by submitting your name below</p>
-          <p class="invite">Our evening reception starts at 19:00. If you would like to come to the evening only,</p>
-          <p class="invite">please click on the evening button below and follow the instructions</p>
+          <p class="invite">Our evening reception starts at 19:00. If you would like to come to the evening only, please click on the evening button below and follow the instructions</p>
           <fieldset class="name">
             <label for="notAttending" class="invite">Guest Name: </label>
             <input id="notAttending" name="Name" required />
@@ -155,7 +154,7 @@
           <br/>
           <p class="invite" id="uploadComplete"></p>
           <input class="submit rsvpSubmit" type="submit" value="Submit non attendance"/>
-          <button class="invite" class="submit rsvpSubmit" onclick="window.location.href='https://evening.atwillrallswedding.co.uk/'">Evening invite</button>
+          <button class="invite rsvpSubmit eveningInvite" onclick="window.location.href='https://evening.atwillrallswedding.co.uk/'">Evening invite</button>
           <button class="goBack" onclick="goBack()">Go Back</button>
         </form>
 
@@ -232,7 +231,7 @@
           })
             .then(
               (res) => res.json(),
-              (complete.innerHTML = "TThank you, your name has been submitted as attending. Love Kirsty and Phil"),
+              (complete.innerHTML = "Thank you, your name has been submitted as attending. Love Kirsty and Phil"),
               attendingForm.reset()
             )
             .catch(
@@ -245,25 +244,24 @@
 
       let noForm = document.getElementById("noRsvp");
       let responsePost = document.getElementById("uploadComplete");
-      let scriptURL =
+      const scriptURL =
         "https://script.google.com/macros/s/AKfycbysLoe-TmUCRIpSa9vprdTzpkruMXRLy9X266zZDrEfV-3UYGar/exec";
 
-     
       noForm.addEventListener("submit", (e) => {
-        console.log(noForm.eveningOnly.checked)
         e.preventDefault();
-        fetch(scriptURL, { method: "POST", body: new FormData(noForm), headers: {
+        fetch(scriptURL, { method: "POST", body: new FormData(noForm),  headers: {
            "Content-Type": "application/json"
-        },  mode: "no-cors"})
+        },  mode: "no-cors" })
           .then(
             (response) => (
+              console.log("Ye"),
               (responsePost.innerHTML = "Thank you, your name has been submitted as not attending. Love Kirsty and Phil"),
               noForm.reset()
             )
           )
           .catch(
             (error) => (
-              (responsePost.innerHTML = "hank you, your name has been submitted as not attending. Love Kirsty and Phil"), noForm.reset()
+              (responsePost.innerHTML = "Thank you, your name has been submitted as not attending. Love Kirsty and Phil"), noForm.reset()
             )
           );
       });
